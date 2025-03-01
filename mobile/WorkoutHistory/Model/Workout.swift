@@ -15,13 +15,18 @@ struct Workout: Codable, Identifiable {
     var duration: Int
     var caloriesBurned: Int
     var imageUrl: String?
+    var createdAt: String
 
-    // Use CodingKeys if API returns different field names
     enum CodingKeys: String, CodingKey {
         case id
         case activity
         case duration
         case caloriesBurned = "calories_burned"
         case imageUrl = "image_url"
+        case createdAt = "created_at"
     }
+}
+
+struct WorkoutResponse: Codable {
+    let message: String
 }

@@ -9,9 +9,20 @@ import SwiftUI
 
 @main
 struct WorkoutHistoryApp: App {
+    @StateObject private var authVM = AuthViewModel()
+
     var body: some Scene {
         WindowGroup {
-            WorkoutHistoryView()
+            let workoutVM = WorkoutViewModel(workoutService: WorkoutService())
+
+            if authVM.isAuthenticated {
+                WorkoutListView()
+                    .environmentObject(authVM)
+                    .environmentObject(workoutVM)
+            } else {
+                LoginView()
+                    .environmentObject(authVM)
+            }
         }
     }
 }
